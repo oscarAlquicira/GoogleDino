@@ -1,0 +1,59 @@
+const parallaxArray = []
+let bg
+let ground
+let car 
+
+//Variables 
+
+var yVelocidad; 
+
+function preload(){
+	
+	ground = loadImage('imagenes/bg.png')
+	car = loadImage('imagenes/carro.png')
+	bg = loadImage('imagenes/layer1.png')
+}
+
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	//declaracion
+	yVelocidad = 0
+
+		//Montañas
+	for(i = 0 ; i < 2 ; i++){
+		let p = new parallax(bg, i*width, 0, width, height,2)
+		parallaxArray.push(p)
+	}
+	//Auto 
+	for(i = 0 ; i < 2 ; i++){
+		let p = new parallax(car, floor(width*0.25), height-200, 0,100,0)
+		parallaxArray.push(p)	
+	}
+
+	//Camino
+	for(i = 0 ; i < 2 ; i++){
+		let p = new parallax(ground, i*width , height-100 , width, 100, 5)
+		parallaxArray.push(p)	
+	}
+	
+}
+
+function draw() {
+	
+	
+	for(let p of parallaxArray){
+		p.draw()
+		p.move()
+	}
+
+}
+
+function handleKeys(){
+	if(touches || keyIsDown(UP_ARROW) || keyIsDown(32)){
+		yVelocidad += 5
+	}
+}
+
+function ponerObstaculos(){
+	
+}
